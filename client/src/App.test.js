@@ -12,7 +12,10 @@ it('renders without crashing', () => {
 test('darkmode', () => {
   let click = false;
   const { getByText } = render(<App darkmode = {() => click = true} />);
+  // taking text dark mode (which comes from the button text Dark Mode On/Off) and making it a variable
   const darkMode = getByText(/dark mode/i);
+  // fireEvent interacts with dom functions, in this case its darkMode
   fireEvent.click(darkMode);
+
   expect(click).toBe(false);
 })
