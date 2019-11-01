@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "@testing-library/react": "^9.3.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.3",
     "express": "^4.15.2"
