@@ -32,6 +32,10 @@
   }
 }
 
+ul, ol {
+  margin-left:0px;
+ }
+
 .dark-mode {
   color: white;
   background-color: black;

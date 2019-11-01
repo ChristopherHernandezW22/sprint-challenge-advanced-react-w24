@@ -41,7 +41,15 @@ function Player(props) {
   return (
     <div className="App">
       <button onClick={toggleMode}>Dark Mode On/Off</button>
-      <h1>Testing Dark Mode</h1>
+      {props.players.map(player => (
+        <div key={player.id}> 
+            <ul>
+                <li>Name: {player.name}</li>
+                <li>ID: {player.id}</li>
+                <li>Country: {player.country}</li>
+                <li>Searches: {player.searches}</li>
+            </ul>
+        </div>))}
     </div>
   )
 }
