@@ -1,26 +1,52 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import useDarkMode from './hooks/useDarkMode';
 
-function App() {
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      players: []
+    };
+  }
+
+  componentDidMount() {
+    console.log("first render (mounting)")
+    fetch('http://localhost:5000/api/players')
+    .then(res => res.json())
+    .then(data => this.setState({ players:data }));
+  }
+
+  componentDidUpdate() {
+    console.log(this.state);
+  }
+
+  render() {
+    return (
+      <div>
+        <SoccerPlayer players={this.state.players}/>
+      </div>
+    );
+  }
+}
+
+function SoccerPlayer(props) {
+  const [darkMode, setDarkMode] = useDarkMode(false);
+  const toggleMode = e => {
+    e.preventDefault();
+    setDarkMode(!darkMode);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={toggleMode}>Dark Mode Button</button>
+      {props.players.map(player => (
+        <div key={player.id}> {player.name}
+                              {player.id}
+                              {player.country}
+                              {player.searches} 
+        </div>))}
     </div>
-  );
+  )
 }
 
 export default App;
