@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
 import axios from 'axios';
+import useDarkMode from './hooks/useDarkMode';
 
 class App extends React.Component {
   constructor() {
@@ -25,9 +26,24 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Player players={this.state.players}/>
       </div>
     );
   }
+}
+
+function Player(props) {
+  const [darkMode, setDarkMode] = useDarkMode(false);
+  const toggleMode = e => {
+    e.preventDefault();
+    setDarkMode(!darkMode);
+  };
+  return (
+    <div className="App">
+      <button onClick={toggleMode}>Dark Mode On/Off</button>
+      <h1>Testing Dark Mode</h1>
+    </div>
+  )
 }
 
 export default App;
